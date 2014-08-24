@@ -1,0 +1,22 @@
+
+* EditEvent
+	* Buttons & pickers for Date and time
+	* Email addresses for contacts - need to be able to get them from Contacts app
+	* Venue/Location - user types in Venue (String), this is passed to Google Maps and lat/long is returned and stored
+	* Done/Cancel in action bar
+
+* Agenda View
+	* Set up adapter
+	* Sort by date
+	* Pressing or long-pressing gives a small popup for Edit/Delete options
+	
+* Week/Month View
+	* Week view - week agenda like DigiCal Week Agenda. Horizontal swipe for different weeks
+	* Month View - Calendar Month takes up 70% of screen, with indicators on days with events.
+	 			   Clicking on a date reveals events for that day in the bottom 30% of screen
+	* Same press/long press behavior as the Agenda View
+	
+* Other
+	* Action Bar spinner for changing between Agend/Month view
+	
+* Do Different views first with basic Event data, then do EditEvent Activity and associated functionality. 

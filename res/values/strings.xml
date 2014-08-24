@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shmalendar!</string>
+    <string name="title_activity_event_editor">EventEditor</string>
+    <string name="event_test_button">Add Guest</string>
+    
+<!-- ACTION BAR ACTIONS -->
+	<string name="action_done">Done</string>    
+	<string name="action_add">Add</string>
+	<string name="action_cancel">Cancel</string>
+    
+    
+    
+<!-- HINTS -->
+    
+    <string name="hint_title">Title</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_time">Time</string>
+    <string name="hint_notes">Add notes here</string>
+    
+    
+
+</resources>
