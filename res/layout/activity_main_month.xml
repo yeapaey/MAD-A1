@@ -11,24 +11,32 @@
     android:orientation="vertical"
     tools:context="com.yeapMAD.assignment1.view.MainActivity">
     
-   <!--  
+
     <GridView 
         android:id="@+id/events_month_list"
         android:numColumns="7"
         android:stretchMode="columnWidth"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         
         
     </GridView>
-     -->
+    
+  <!--   
+    <TextView 
+        android:id="@+id/events_month_tester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is where the grid ends"/>"
+ -->
+<!--      
     <ListView 
         android:id="@+id/events_month_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
     </ListView>
-    
+     -->
     
     
     

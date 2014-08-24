@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
@@ -39,25 +39,27 @@ public class MainActivity extends Activity
 			@Override
 			public boolean onNavigationItemSelected(int itemPosition, long itemId)
 			{
-				EventsAgendaAdapter adapter = new EventsAgendaAdapter(getBaseContext(), DataEngine.getEvents());
+				BaseAdapter adapter;
 				switch (itemPosition)
 				{
 				case 0:
 //					System.out.println("Agenda****************************");
 					home.setContentView(R.layout.activity_main_agenda);
+					ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
 					adapter = agendaAdapter;
+					agendaView.setAdapter(adapter);
 					break;
 				case 1:
 //					System.out.println("Month****************************");
-					home.setContentView(R.layout.activity_main_agenda);
-					adapter = new TestAdapter(getBaseContext(), DataEngine.getEvents());
+					home.setContentView(R.layout.activity_main_month);
+					GridView monthView = (GridView) findViewById(R.id.events_month_list);
+					adapter = new MonthDatesAdapter(getBaseContext(), getResources().getIntArray(R.array.integer_array_month_28));
+					monthView.setAdapter(adapter);
 					break;
 					default:
 						setContentView(R.layout.activity_main_agenda);
 				}
 				
-				ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
-				agendaView.setAdapter(adapter);
 
 				return true;
 			}
