@@ -71,11 +71,4 @@ public class EventsAgendaAdapter extends BaseAdapter
 		return convertView;
 	}
 
-	// Remove after testing
-	public LinkedList<PlannedEvent> getEvents()
-	{
-		return events;
-	}
-
-	
 }

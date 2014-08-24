@@ -6,6 +6,7 @@
         <item>Month</item>
     </string-array>
         
+    <!-- Could change integer-array to array (TypedArray) so you can use references to other resources -->
     <integer-array
         name="integer_array_month_28">
         <item>1</item>
