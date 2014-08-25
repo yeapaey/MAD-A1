@@ -1,5 +1,6 @@
 package com.yeapMAD.assignment1.view;
 
+import java.text.DateFormat;
 import java.util.LinkedList;
 
 import android.content.Context;
@@ -62,13 +63,17 @@ public class EventsAgendaAdapter extends BaseAdapter
 		}
 		
 		TextView title = (TextView) convertView.findViewById(R.id.event_list_title);
+		TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
 		TextView note = (TextView) convertView.findViewById(R.id.event_list_note);
 		TextView venue = (TextView) convertView.findViewById(R.id.event_list_venue);
 		TextView lat = (TextView) convertView.findViewById(R.id.event_list_lat);
 		TextView lon = (TextView) convertView.findViewById(R.id.event_list_long);
+		DateFormat dFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		
 		PlannedEvent event = events.get(position);
 		title.setText(event.getTitle());
+		date.setText(dFormat.format(event.getCalendar().getTime()));
+
 		note.setText(event.getNote());
 		venue.setText(event.getStrAddress());
 		
@@ -80,6 +85,7 @@ public class EventsAgendaAdapter extends BaseAdapter
 			lon.setText(lonD.toString());
 		}
 
+		 
 		
 		
 		
