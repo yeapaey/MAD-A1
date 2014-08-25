@@ -22,11 +22,6 @@ public class EventsMonthAdapter extends BaseAdapter {
 		super();
 		this.context = context;
 		this.dates = new ArrayList<Integer>();
-		for (int i = 0; i < dates.length; ++i)
-		{
-			this.dates.add(dates[i]);
-			System.out.println(this.dates.get(i));
-		}
 	}
 	
 	@Override

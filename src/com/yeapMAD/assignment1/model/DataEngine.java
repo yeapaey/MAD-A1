@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Observer;
 
 import android.app.Application;
+import android.location.Address;
 
 public class DataEngine extends Application 
 {
@@ -18,7 +19,7 @@ public class DataEngine extends Application
 		DummyData.generateEvents(events);
 	}
 
-	public static void addEvent(String title, String notes, Calendar calendar)
+	public static void addEvent(String title, String notes, Calendar calendar, String strAddress, Address address)
 	{
 		int i;
 		for (i = 0; calendar.after(events.get(i).getCalendar()); ++i)
@@ -27,11 +28,11 @@ public class DataEngine extends Application
 		
 		if (i == events.size())
 		{
-			events.addLast(new PlannedEvent(title, notes, calendar));
+			events.addLast(new PlannedEvent(title, notes, calendar, strAddress, address));
 		}
 		else 
 		{
-			events.add(i, new PlannedEvent(title, notes, calendar));
+			events.add(i, new PlannedEvent(title, notes, calendar, strAddress, address));
 		}
 		
 		

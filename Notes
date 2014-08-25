@@ -2,7 +2,7 @@
 * EditEvent
 	* Buttons & pickers for Date and time
 	* Email addresses for contacts - need to be able to get them from Contacts app
-	* Venue/Location - user types in Venue (String), this is passed to Google Maps and lat/long is returned and stored
+	* Venue/Location - user types in Venue (String), this is passed to Google Maps (use class Geocoder) and lat/long is returned and stored
 	* Done/Cancel in action bar
 
 * Agenda View

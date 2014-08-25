@@ -26,7 +26,7 @@ public class MainActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_agenda);
+//		setContentView(R.layout.activity_main_agenda);
 		
 		agendaAdapter = new EventsAgendaAdapter(this, DataEngine.getEvents());
 		monthAdapter = new EventsMonthAdapter(getBaseContext(), getResources().getIntArray(R.array.integer_array_month_28));
@@ -104,6 +104,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main_agenda);
 		ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
 		agendaView.setAdapter(agendaAdapter);
+		System.out.println("launchAgendaView() **********************************");
 	}
 	
 	private void launchMonthView()
@@ -111,5 +112,6 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main_month);
 		GridView monthView = (GridView) findViewById(R.id.events_month_list);
 		monthView.setAdapter(monthAdapter);
+		System.out.println("launchMonthView() **********************************");
 	}
 }
