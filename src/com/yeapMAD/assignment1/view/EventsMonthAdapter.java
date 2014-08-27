@@ -22,6 +22,11 @@ public class EventsMonthAdapter extends BaseAdapter {
 		super();
 		this.context = context;
 		this.dates = new ArrayList<Integer>();
+		
+		for (int i = 0; i < dates.length; ++i)
+		{
+			this.dates.add(i);
+		}
 	}
 	
 	@Override
@@ -38,7 +43,7 @@ public class EventsMonthAdapter extends BaseAdapter {
 
 	@Override
 	public long getItemId(int position) {
-		
+		 
 		return position;
 	}
 
