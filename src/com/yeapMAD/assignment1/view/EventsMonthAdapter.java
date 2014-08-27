@@ -1,6 +1,8 @@
 package com.yeapMAD.assignment1.view;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.PlannedEvent;
@@ -23,7 +25,11 @@ public class EventsMonthAdapter extends BaseAdapter {
 		this.context = context;
 		this.dates = new ArrayList<Integer>();
 		
-		for (int i = 0; i < dates.length; ++i)
+		
+		Calendar cal = GregorianCalendar.getInstance();
+		int monthLen = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		// Just creating the arrays ahead of time and referencing them when needed may be quicker.
+		for (int i = 0; i < monthLen; ++i)
 		{
 			this.dates.add(i);
 		}

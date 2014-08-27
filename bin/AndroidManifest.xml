@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
-    
+
     <application
         android:name="com.yeapMAD.assignment1.model.DataEngine"
         android:allowBackup="true"
@@ -30,5 +30,6 @@
         
         
     </application>
-     
+    
+	
 </manifest>
