@@ -1,16 +1,12 @@
 package com.yeapMAD.assignment1.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
 
 public class DummyData
 {
-	private ArrayList<PlannedEvent> events;
-
 	public DummyData()
 	{
-		events = new ArrayList<PlannedEvent>();
 	}
 
 	public static void generateEvents(Collection<PlannedEvent> collection)

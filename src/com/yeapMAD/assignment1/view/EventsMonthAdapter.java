@@ -27,8 +27,6 @@ public class EventsMonthAdapter extends BaseAdapter
 	private Calendar present;
 	private SortedMap<Calendar, ArrayList<PlannedEvent>> monthGrid; // NB Using Calendar as key may be problematic
 
-	// private SortedMap<Integer, ArrayList<PlannedEvent>> data;
-	// Don't put this here. It should go somewhere else (probably owned by the activity)
 	public EventsMonthAdapter(Context context, Collection<PlannedEvent> events)
 	{
 		super();
@@ -38,60 +36,18 @@ public class EventsMonthAdapter extends BaseAdapter
 		month = present.get(Calendar.MONTH);
 		int monthLen = present.getActualMaximum(Calendar.DAY_OF_MONTH);
 		monthGrid = new TreeMap<Calendar, ArrayList<PlannedEvent>>();
-		
-		// Make an entry for each day of the month
-		for (int i = 1; i <= monthLen; ++i)
+
+		for (int i = 1; i <= monthLen; ++i) // Make an entry for each day of the month
 		{
 			monthGrid.put(new GregorianCalendar(year, month, i), new ArrayList<PlannedEvent>());
 		}
 
-		updateEvents(events);
-		// Assign each event to the day of the month if appropriate
-		// for (PlannedEvent event : events)
-		// {
-		// Calendar eCal = event.getCalendar();
-		// if (eCal.get(Calendar.YEAR) == year && eCal.get(Calendar.MONTH) == month)
-		// {
-		// List<PlannedEvent> list = monthGrid.get(eCal.get(Calendar.DAY_OF_MONTH));
-		// list.add(event);
-		// // Sort list here
-		// }
-		// }
-
-		// Calendar monthEnd = new GregorianCalendar(year, month, present.getActualMaximum(Calendar.DAY_OF_MONTH));
-
-
-		// Iterator<PlannedEvent> iter = events.iterator();
-		// PlannedEvent current = null;
-//		boolean found = false;
-//
-//		while (iter.hasNext() && !found)
-//		{
-//			current = iter.next();
-//			if (current.getCalendar().get(Calendar.YEAR) == present.get(Calendar.YEAR)
-//					&& current.getCalendar().get(Calendar.MONTH) == present.get(Calendar.MONTH))
-//			{
-//				found = true;
-//			}
-//		}
-
-		// This would actually be a good time to divide events up by day of month
-// iter = 0;
-// PlannedEvent current = events.get(iter);
-// while (!current.getCalendar().after(monthEnd))
-// {
-// if (current.getCalendar().get(Calendar.MONTH) == monthEnd.get(Calendar.MONTH))
-// {
-// MonthDayWrapper item = new MonthDayWrapper(current.getCalendar().get(Calendar.DAY_OF_MONTH), true);
-// monthGrid.put(item.getKey(), item); // This may not be right
-// }
-//
-// ++iter;
-// current = DataEngine.getEvents().get(iter);
-// }
+		updateEvents(events); // Populate dates with appropriate events
 	}
 
 	// Assign each event to the day of the month if appropriate
+	// This is inefficient as each update requires the whole list be processed again
+	// Need to add sort of date's event list after update?? In date order for list view in bottom portion
 	public void updateEvents(Collection<PlannedEvent> events)
 	{
 		for (PlannedEvent event : events)
@@ -112,14 +68,12 @@ public class EventsMonthAdapter extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-
 		return monthGrid.size();
 	}
 
 	@Override
 	public Object getItem(int position)
 	{
-
 		return monthGrid.get(position);
 	}
 
@@ -132,7 +86,6 @@ public class EventsMonthAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-
 		if (convertView == null)
 		{
 			convertView = LayoutInflater.from(context).inflate(R.layout.event_month_square, parent, false);
@@ -142,13 +95,10 @@ public class EventsMonthAdapter extends BaseAdapter
 		TextView eventBool = (TextView) convertView.findViewById(R.id.event_month_eventBool);
 
 		// Using POSITION is potentially a problem, because it doesn't necessarily match up with key values
-		// item = monthGrid.get(++position);
-
 		Integer objPos = ++position;
 		dayNum.setText(objPos.toString());
 		eventBool.setText(monthGrid.get(new GregorianCalendar(year, month, objPos)).isEmpty() ? "" : "*");
 
 		return convertView;
 	}
-
 }

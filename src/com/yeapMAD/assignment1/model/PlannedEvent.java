@@ -12,13 +12,6 @@ public class PlannedEvent
 	private String strAddress;
 	private Address address;
 
-	// public PlannedEvent(String title, Calendar calendar)
-	// {
-	// this.title = title;
-	// notes = new String();
-	// this.calendar = calendar;
-	// }
-
 	public PlannedEvent(String title, String note, Calendar calendar)
 	{
 		this.title = title;

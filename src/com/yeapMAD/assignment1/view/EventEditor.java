@@ -21,15 +21,11 @@ import com.yeapMAD.assignment1.model.DataEngine;
 
 public class EventEditor extends Activity
 {
-
-	private int count = 1;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_editor);
-
 		// Check if bundle has saved state and load if true, otherwise use defaults
 	}
 
