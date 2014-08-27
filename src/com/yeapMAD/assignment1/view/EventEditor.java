@@ -29,10 +29,9 @@ public class EventEditor extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_editor);
-		
+
 		// Check if bundle has saved state and load if true, otherwise use defaults
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
@@ -40,7 +39,6 @@ public class EventEditor extends Activity
 		getMenuInflater().inflate(R.menu.event_editor, menu);
 		return true;
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -56,12 +54,12 @@ public class EventEditor extends Activity
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		
+
 		finish();
 		return true;
 	}
 
-//	Should this go in an external controller???
+	// Should this go in an external controller???
 	public void onDoneClick(View view)
 	{
 		TextView title = (TextView) findViewById(R.id.event_title);
@@ -71,28 +69,30 @@ public class EventEditor extends Activity
 		int year = datePicker.getYear();
 		int day = datePicker.getDayOfMonth();
 		int month = datePicker.getMonth();
-		
+
 		System.out.println("onDoneClick... *****************************************");
-		
+
 		Geocoder geocoder = new Geocoder(getBaseContext());
-		
+
 		String strVenue = venue.getText().toString();
 		List<Address> addy = new ArrayList<Address>();
-		try {
+		try
+		{
 			addy = geocoder.getFromLocationName(strVenue, 1);
 
 			System.out.println("Addy has " + addy.size() + " elements *****************************************");
-			
-//			System.out.printf("%s: Lat = %l Long = %l ********************************\n ", s, addy.get(0).getLatitude(), addy.get(0).getLongitude());
-		} 
-		catch (IOException e) {
+
+			// System.out.printf("%s: Lat = %l Long = %l ********************************\n ", s,
+			// addy.get(0).getLatitude(), addy.get(0).getLongitude());
+		}
+		catch (IOException e)
+		{
 			System.out.println("Exception caught! ******************************************");
 			e.printStackTrace();
 		}
-		
-		
-		DataEngine.addEvent(title.getText().toString(), note.getText().toString(), new GregorianCalendar(year, month, day), strVenue, addy.get(0));
-		
+
+		DataEngine.addEvent(title.getText().toString(), note.getText().toString(), new GregorianCalendar(year, month,
+				day), strVenue, (addy.size() > 0 ? addy.get(0) : null));
 
 	}
 
