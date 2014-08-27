@@ -1,13 +1,18 @@
 package com.yeapMAD.assignment1.view;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import android.app.Activity;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -56,40 +61,39 @@ public class EventEditor extends Activity
 		return true;
 	}
 
-
+//	Should this go in an external controller???
 	public void onDoneClick(View view)
 	{
 		TextView title = (TextView) findViewById(R.id.event_title);
 		TextView note = (TextView) findViewById(R.id.event_note);
+		EditText venue = (EditText) findViewById(R.id.event_venue);
+		DatePicker datePicker = (DatePicker) findViewById(R.id.event_date);
+		int year = datePicker.getYear();
+		int day = datePicker.getDayOfMonth();
+		int month = datePicker.getMonth();
 		
-		DataEngine.addEvent(title.getText().toString(), note.getText().toString(), new GregorianCalendar(2015, 01, 01));
+		System.out.println("onDoneClick... *****************************************");
+		
+		Geocoder geocoder = new Geocoder(getBaseContext());
+		
+		String strVenue = venue.getText().toString();
+		List<Address> addy = new ArrayList<Address>();
+		try {
+			addy = geocoder.getFromLocationName(strVenue, 1);
+
+			System.out.println("Addy has " + addy.size() + " elements *****************************************");
+			
+//			System.out.printf("%s: Lat = %l Long = %l ********************************\n ", s, addy.get(0).getLatitude(), addy.get(0).getLongitude());
+		} 
+		catch (IOException e) {
+			System.out.println("Exception caught! ******************************************");
+			e.printStackTrace();
+		}
 		
 		
-//		Button button = (Button) findViewById(R.id.test_button);
-////		button.setText("Add Guest " + count);
-////		++count;
-//		
-//		EditText title = (EditText) findViewById(R.id.event_title);
-//		EditText notes = (EditText) findViewById(R.id.event_notes);
-//		
-//		
-//		
-//		DataEngine.addEvent(title.toString(), notes.toString(), new GregorianCalendar());
-		
-		
+		DataEngine.addEvent(title.getText().toString(), note.getText().toString(), new GregorianCalendar(year, month, day), strVenue, addy.get(0));
 		
 
-		// ViewGroup layout = (ViewGroup)
-		// findViewById(R.layout.activity_event_editor);
-		//
-		// if (layout == null)
-		// {
-		// System.out.println("Layout is null");
-		// return;
-		// }
-		// EditText text = new EditText(this);
-		// text.setText("Add a guest");
-		// layout.addView(text);
 	}
 
 }

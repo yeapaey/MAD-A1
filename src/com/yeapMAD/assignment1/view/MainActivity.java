@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 
@@ -19,16 +19,17 @@ import com.yeapMAD.assignment1.model.DataEngine;
 public class MainActivity extends Activity
 {	
 	private EventsAgendaAdapter agendaAdapter;
-	private Activity home;
+	private EventsMonthAdapter monthAdapter;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main_agenda);
+//		setContentView(R.layout.activity_main_agenda);
 		
-		home = this;
 		agendaAdapter = new EventsAgendaAdapter(this, DataEngine.getEvents());
+		monthAdapter = new EventsMonthAdapter(getBaseContext(), getResources().getIntArray(R.array.integer_array_month_28));
 		
 		SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, 
 											R.array.string_array_display_modes, android.R.layout.simple_dropdown_item_1line);
@@ -39,25 +40,18 @@ public class MainActivity extends Activity
 			@Override
 			public boolean onNavigationItemSelected(int itemPosition, long itemId)
 			{
-				EventsAgendaAdapter adapter = new EventsAgendaAdapter(getBaseContext(), DataEngine.getEvents());
+				// Maybe an enum or private keys could be used here instead of hard coding
 				switch (itemPosition)
 				{
 				case 0:
-//					System.out.println("Agenda****************************");
-					home.setContentView(R.layout.activity_main_agenda);
-					adapter = agendaAdapter;
+					launchAgendaView();
 					break;
 				case 1:
-//					System.out.println("Month****************************");
-					home.setContentView(R.layout.activity_main_agenda);
-					adapter = new TestAdapter(getBaseContext(), DataEngine.getEvents());
+					launchMonthView();
 					break;
-					default:
-						setContentView(R.layout.activity_main_agenda);
-				}
-				
-				ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
-				agendaView.setAdapter(adapter);
+				default:
+					launchAgendaView();
+				}	
 
 				return true;
 			}
@@ -66,13 +60,6 @@ public class MainActivity extends Activity
 		ActionBar actionBar = getActionBar();
 		actionBar.setListNavigationCallbacks(spinnerAdapter, onNavListener);
 		actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_LIST);
-		
-		
-		
-		
-		
-//		ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
-//		agendaView.setAdapter(agendaAdapter);
 	}
 
 	@Override
@@ -95,9 +82,6 @@ public class MainActivity extends Activity
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_add)
 		{
@@ -112,5 +96,22 @@ public class MainActivity extends Activity
 		startActivity(intent);
 		
 		return true;
+	}
+	
+	
+	private void launchAgendaView()
+	{
+		setContentView(R.layout.activity_main_agenda);
+		ListView agendaView = (ListView) findViewById(R.id.events_agenda_list);
+		agendaView.setAdapter(agendaAdapter);
+		System.out.println("launchAgendaView() **********************************");
+	}
+	
+	private void launchMonthView()
+	{
+		setContentView(R.layout.activity_main_month);
+		GridView monthView = (GridView) findViewById(R.id.events_month_list);
+		monthView.setAdapter(monthAdapter);
+		System.out.println("launchMonthView() **********************************");
 	}
 }
