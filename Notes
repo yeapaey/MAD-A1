@@ -8,15 +8,24 @@
 * Agenda View
 	* Set up adapter
 	* Sort by date
-	* Pressing or long-pressing gives a small popup for Edit/Delete options
+	* Pressing or long-pressing gives a small pop-up for Edit/Delete options
+		* if not feasible, just go straight to edit
+		
+	* Should events that have finished be displayed??
 	
 * Week/Month View
 	* Week view - week agenda like DigiCal Week Agenda. Horizontal swipe for different weeks
 	* Month View - Calendar Month takes up 70% of screen, with indicators on days with events.
 	 			   Clicking on a date reveals events for that day in the bottom 30% of screen
 	* Same press/long press behavior as the Agenda View
+		* If the edit/Delete thing isn't feasible, then just go straight to edit. 
 	
 * Other
-	* Action Bar spinner for changing between Agend/Month view
+	* Action Bar spinner for changing between Agenda/Month view
+	* May need to make an abstract EventAdapter, then subclass.  Necessary adapters:
+		* AgendaView - list 
+		* Month View - gridView and ListView below
+	* Month view isn't refreshing when a new event is added.
+	* Making the adapters observers that observe the DataEngine would be ideal so that the automatically update.
 	
 * Do Different views first with basic Event data, then do EditEvent Activity and associated functionality. 

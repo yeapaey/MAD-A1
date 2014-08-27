@@ -1,9 +1,6 @@
 package com.yeapMAD.assignment1.view;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.SortedMap;
-import java.util.TreeMap;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -24,7 +21,6 @@ import android.widget.Toast;
 import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.MonthDayWrapper;
-import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class MainActivity extends Activity
 {
@@ -88,6 +84,10 @@ public class MainActivity extends Activity
 	{
 		super.onResume();
 		agendaAdapter.updateEvents(DataEngine.getEvents());
+		if (monthAdapter != null)
+		{
+			monthAdapter.updateEvents(DataEngine.getEvents());
+		}
 	}
 
 	@Override
@@ -139,46 +139,10 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main_month);
 		GridView monthView = (GridView) findViewById(R.id.events_month_list);
 		
-		/***************** ALL THIS STUFF SHOULD PROBABLY BE INSIDE THE ADAPTER ***********************************/
-		Calendar present = GregorianCalendar.getInstance();
-		Calendar monthEnd = new GregorianCalendar(present.get(Calendar.YEAR), present.get(Calendar.MONTH), 
-																		present.getActualMaximum(Calendar.DAY_OF_MONTH));
-		int monthLen = present.getActualMaximum(Calendar.DAY_OF_MONTH);
-		int iter = 0;
-		
-		// Just creating the arrays ahead of time and referencing them when needed may be quicker.
-		// Initialise (forgot what I was writing...)
-		if (monthGrid == null)
-		{
-			monthGrid = new TreeMap<Integer, MonthDayWrapper>();
-		}
-		
-		for (iter = 1; iter <= monthLen; ++iter)
-		{
-			monthGrid.put(iter, new MonthDayWrapper(iter, false));
-		}
-
-		// This would actually be a good time to divide events up by day of month
-		iter = 0;
-		PlannedEvent current = DataEngine.getEvents().get(iter);
-		while (!current.getCalendar().after(monthEnd))
-		{
-			if (current.getCalendar().get(Calendar.MONTH) == monthEnd.get(Calendar.MONTH)) 
-			{
-				MonthDayWrapper item = new MonthDayWrapper(current.getCalendar().get(Calendar.DAY_OF_MONTH), true);
-				monthGrid.put(item.getKey(), item); // This may not be right
-			}
-			
-			++iter;
-			current = DataEngine.getEvents().get(iter);
-		}
-			
-		
 		if (monthAdapter == null)
 		{
-			monthAdapter = new EventsMonthAdapter(getBaseContext(), monthGrid);
+			monthAdapter = new EventsMonthAdapter(getBaseContext(), DataEngine.getEvents());
 		}
-		/*****************************************************************************************************************/
 		
 		monthView.setAdapter(monthAdapter);
 
