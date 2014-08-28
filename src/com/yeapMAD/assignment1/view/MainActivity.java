@@ -153,6 +153,5 @@ public class MainActivity extends Activity
 		Button prevButton = (Button) findViewById(R.id.events_month_previous_button);
 		nextButton.setOnClickListener(buttonListener);
 		prevButton.setOnClickListener(buttonListener);
-
 	}
 }
