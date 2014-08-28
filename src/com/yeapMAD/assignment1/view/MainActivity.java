@@ -1,5 +1,7 @@
 package com.yeapMAD.assignment1.view;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.Activity;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
@@ -18,6 +21,10 @@ import android.widget.Toast;
 
 import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.DataEngine;
+import com.yeapMAD.assignment1.model.PlannedEvent;
+
+import controllers.ChangeMonthButtonListener;
+import controllers.MonthViewClickListener;
 
 public class MainActivity extends Activity
 {
@@ -129,6 +136,9 @@ public class MainActivity extends Activity
 	{
 		setContentView(R.layout.activity_main_month);
 		GridView monthView = (GridView) findViewById(R.id.events_month_list);
+		ListView dateList = (ListView) findViewById(R.id.events_month_date_list);
+		EventsDateListAdapter dateListAdapter = new EventsDateListAdapter(this, new ArrayList<PlannedEvent>());
+		dateList.setAdapter(dateListAdapter);
 		
 		if (monthAdapter == null)
 		{
@@ -136,16 +146,13 @@ public class MainActivity extends Activity
 		}
 		
 		monthView.setAdapter(monthAdapter);
+		monthView.setOnItemClickListener(new MonthViewClickListener(dateListAdapter, monthAdapter));	
+		
+		Button nextButton = (Button) findViewById(R.id.events_month_next_button);
+		Button prevButton = (Button) findViewById(R.id.events_month_previous_button);
+		ChangeMonthButtonListener buttonListener = new ChangeMonthButtonListener(monthAdapter);
+		nextButton.setOnClickListener(buttonListener);
+		prevButton.setOnClickListener(buttonListener);
 
-		monthView.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Integer pos = ++position;
-				Toast.makeText(parent.getContext(), "Pressed Day " + pos, Toast.LENGTH_SHORT).show();
-
-			}
-		});
 	}
 }

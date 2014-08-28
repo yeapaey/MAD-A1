@@ -4,6 +4,9 @@
     <string name="app_name">Shmalendar!</string>
     <string name="title_activity_event_editor">EventEditor</string>
     <string name="event_test_button">Add Guest</string>
+    <string name="events_month_previous">Prev</string>
+    <string name="events_month_next">Next</string>
+    
     
 <!-- ACTION BAR ACTIONS -->
 	<string name="action_done">Done</string>    

@@ -12,7 +12,20 @@
     android:background="#000000"
     tools:context="com.yeapMAD.assignment1.view.MainActivity">
     
-
+	<Button 
+	    android:id="@+id/events_month_previous_button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/events_month_previous"
+	    android:layout_gravity="left"/>
+	
+	<Button 
+	    android:id="@+id/events_month_next_button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/events_month_next"
+	    android:layout_gravity="right"/>
+    
     <GridView 
         android:id="@+id/events_month_list"
         android:numColumns="7"
@@ -21,18 +34,16 @@
         android:layout_height="wrap_content"
         android:verticalSpacing="@dimen/month_grid_border"
         android:horizontalSpacing="@dimen/month_grid_border"
-        android:padding="@dimen/month_grid_border"
-        >   
+        android:padding="@dimen/month_grid_border">   
     </GridView>
     
 
-    <TextView 
-        android:id="@+id/events_month_tester"
+    <ListView 
+        android:id="@+id/events_month_date_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/app_name"
         android:layout_weight="1"
-        android:gravity="center"
-        android:background="#999999"/>
+        android:background="#999999">
+    </ListView>
 
 </LinearLayout>

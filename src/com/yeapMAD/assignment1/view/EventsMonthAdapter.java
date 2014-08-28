@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -16,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yeapMAD.assignment1.R;
+import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class EventsMonthAdapter extends BaseAdapter
@@ -25,38 +27,49 @@ public class EventsMonthAdapter extends BaseAdapter
 	private int year;
 	private int month;
 	private Calendar present;
-	private SortedMap<Calendar, ArrayList<PlannedEvent>> monthGrid; // NB Using Calendar as key may be problematic
+	private SortedMap<Integer, ArrayList<PlannedEvent>> monthGrid; // Using Calendar for key WAS problematic
 
 	public EventsMonthAdapter(Context context, Collection<PlannedEvent> events)
 	{
 		super();
 		this.context = context;
-		present = GregorianCalendar.getInstance();
-		year = present.get(Calendar.YEAR);
-		month = present.get(Calendar.MONTH);
-		int monthLen = present.getActualMaximum(Calendar.DAY_OF_MONTH);
-		monthGrid = new TreeMap<Calendar, ArrayList<PlannedEvent>>();
-
-		for (int i = 1; i <= monthLen; ++i) // Make an entry for each day of the month
-		{
-			monthGrid.put(new GregorianCalendar(year, month, i), new ArrayList<PlannedEvent>());
-		}
-
+		monthGrid = new TreeMap<Integer, ArrayList<PlannedEvent>>();
+		setCurrentDate(GregorianCalendar.getInstance());
 		updateEvents(events); // Populate dates with appropriate events
 	}
 
+	
+	public void setCurrentDate(Calendar newDate)
+	{
+		present = newDate;
+		year = present.get(Calendar.YEAR);
+		month = present.get(Calendar.MONTH);
+		
+		updateEvents(DataEngine.getEvents());
+	}
+	
+	public Calendar getCurrentDate()
+	{
+		return present; // would be better to make this immutable
+	}
 	// Assign each event to the day of the month if appropriate
 	// This is inefficient as each update requires the whole list be processed again
 	// Need to add sort of date's event list after update?? In date order for list view in bottom portion
 	public void updateEvents(Collection<PlannedEvent> events)
 	{
+		monthGrid.clear();
+		
+		for (int i = 1; i <= present.getActualMaximum(Calendar.DAY_OF_MONTH); ++i) // Make an entry for each day of the month
+		{
+			monthGrid.put(i, new ArrayList<PlannedEvent>());
+		}
+		
 		for (PlannedEvent event : events)
 		{
 			Calendar eCal = event.getCalendar();
 			if (eCal.get(Calendar.YEAR) == year && eCal.get(Calendar.MONTH) == month)
 			{
-				List<PlannedEvent> list = monthGrid.get(new GregorianCalendar(year, month, eCal
-						.get(Calendar.DAY_OF_MONTH)));
+				List<PlannedEvent> list = monthGrid.get(eCal.get(Calendar.DAY_OF_MONTH));
 				list.add(event);
 				// Sort list here
 			}
@@ -74,6 +87,7 @@ public class EventsMonthAdapter extends BaseAdapter
 	@Override
 	public Object getItem(int position)
 	{
+		
 		return monthGrid.get(position);
 	}
 
@@ -94,10 +108,9 @@ public class EventsMonthAdapter extends BaseAdapter
 		TextView dayNum = (TextView) convertView.findViewById(R.id.event_month_dayNum);
 		TextView eventBool = (TextView) convertView.findViewById(R.id.event_month_eventBool);
 
-		// Using POSITION is potentially a problem, because it doesn't necessarily match up with key values
 		Integer objPos = ++position;
 		dayNum.setText(objPos.toString());
-		eventBool.setText(monthGrid.get(new GregorianCalendar(year, month, objPos)).isEmpty() ? "" : "*");
+		eventBool.setText(monthGrid.get(objPos).isEmpty() ? "" : "*");
 
 		return convertView;
 	}
