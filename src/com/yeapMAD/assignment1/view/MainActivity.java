@@ -148,9 +148,9 @@ public class MainActivity extends Activity
 		monthView.setAdapter(monthAdapter);
 		monthView.setOnItemClickListener(new MonthViewClickListener(dateListAdapter, monthAdapter));	
 		
+		ChangeMonthButtonListener buttonListener = new ChangeMonthButtonListener(monthAdapter);
 		Button nextButton = (Button) findViewById(R.id.events_month_next_button);
 		Button prevButton = (Button) findViewById(R.id.events_month_previous_button);
-		ChangeMonthButtonListener buttonListener = new ChangeMonthButtonListener(monthAdapter);
 		nextButton.setOnClickListener(buttonListener);
 		prevButton.setOnClickListener(buttonListener);
 
