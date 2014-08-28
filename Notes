@@ -25,7 +25,6 @@
 	* May need to make an abstract EventAdapter, then subclass.  Necessary adapters:
 		* AgendaView - list 
 		* Month View - gridView and ListView below
-	* Month view isn't refreshing when a new event is added.
 	* Making the adapters observers that observe the DataEngine would be ideal so that the automatically update.
 	
 * Do Different views first with basic Event data, then do EditEvent Activity and associated functionality. 
