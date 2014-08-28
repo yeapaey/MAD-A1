@@ -1,10 +1,11 @@
 package com.yeapMAD.assignment1.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import android.location.Address;
 
-public class PlannedEvent
+public class PlannedEvent implements Serializable
 {
 	private String title;
 	private String note;
