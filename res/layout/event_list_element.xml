@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-<<<<<<< HEAD
-    android:layout_height="match_parent" >
-=======
     android:layout_height="match_parent" 
     android:paddingTop="@dimen/standard_padding">
->>>>>>> origin/MonthView
-    
    
     <TextView 
         android:id="@+id/event_list_title"
@@ -15,20 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-<<<<<<< HEAD
-=======
         android:textSize="@dimen/event_title"
->>>>>>> origin/MonthView
         android:hint="@string/hint_title"/>
     
     <TextView 
         android:id="@+id/event_list_date"
-<<<<<<< HEAD
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/event_list_title"/>
-    
-=======
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/default_text_size"
@@ -64,47 +50,20 @@
         android:layout_toRightOf="@id/event_label_to"
         android:hint="@string/hint_end_time" />
 
->>>>>>> origin/MonthView
     <TextView 
         android:id="@+id/event_list_venue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_below="@id/event_list_date"
-        android:hint="@string/hint_venue" />
-       
-	<TextView 
-	    android:id="@+id/event_list_lat"
-	    android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/event_list_venue"
-        android:hint="@string/hint_lat"/>
-	
-	<TextView 
-	    android:id="@+id/event_list_long"
-	    android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/event_list_lat"
-        android:hint="@string/hint_long"/>
-	
-=======
         android:textSize="@dimen/default_text_size"
         android:layout_below="@id/event_list_date"
         android:hint="@string/hint_venue" />
 
->>>>>>> origin/MonthView
 	<TextView 
         android:id="@+id/event_list_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_below="@id/event_list_long"
-=======
         android:textSize="@dimen/default_text_size"
         android:layout_below="@id/event_list_venue"
->>>>>>> origin/MonthView
         android:hint="@string/hint_notes"/>
-    
-
-
+ 
 </RelativeLayout>
