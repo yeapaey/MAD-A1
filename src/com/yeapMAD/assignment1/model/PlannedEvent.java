@@ -15,7 +15,7 @@ public class PlannedEvent implements Serializable
 	private Calendar startTime;
 	private Calendar endTime;
 	private String note;
-	private Address address;
+//	private Address address;
 
 	public PlannedEvent(String title, String venue, Calendar startTime)
 	{
@@ -25,17 +25,17 @@ public class PlannedEvent implements Serializable
 		this.startTime = startTime;
 		endTime = (Calendar) startTime.clone();
 		note = new String();
-		address = new Address(Locale.getDefault());
+//		address = new Address(Locale.getDefault());
 	}
 
-	public PlannedEvent(String title, String venue, Calendar startTime, Calendar endTime, String note, Address address)
+	public PlannedEvent(String title, String venue, Calendar startTime, Calendar endTime, String note)
 	{
 		this.title = title;
 		this.venue = venue;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.note = note;
-		this.address = address;
+//		this.address = address;
 	}
 
 	public String getTitle()
@@ -93,15 +93,15 @@ public class PlannedEvent implements Serializable
 		this.note = note;
 	}
 
-	public Address getAddress()
-	{
-		return address;
-	}
-
-	public void setAddress(Address address)
-	{
-		this.address = address;
-	}
+//	public Address getAddress()
+//	{
+//		return address;
+//	}
+//
+//	public void setAddress(Address address)
+//	{
+//		this.address = address;
+//	}
 
 	public UUID getId()
 	{

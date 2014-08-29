@@ -1,17 +1,12 @@
 package com.yeapMAD.assignment1.view;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -130,22 +125,22 @@ public class EventEditor extends Activity
 		newEvent.setVenue(venue.getText().toString());
 		newEvent.setNote(note.getText().toString());
 
-		Geocoder geocoder = new Geocoder(getBaseContext());
-
-		List<Address> addresses = new ArrayList<Address>();
-		try
-		{
-			addresses = geocoder.getFromLocationName(newEvent.getVenue(), 1);
-			if (!addresses.isEmpty())
-			{
-				newEvent.setAddress(addresses.get(0));
-			}
-		}
-		catch (IOException e)
-		{
-			System.out.println("Exception caught! ******************************************");
-			e.printStackTrace();
-		}
+		// Geocoder geocoder = new Geocoder(getBaseContext());
+		//
+		// List<Address> addresses = new ArrayList<Address>();
+		// try
+		// {
+		// addresses = geocoder.getFromLocationName(newEvent.getVenue(), 1);
+		// if (!addresses.isEmpty())
+		// {
+		// newEvent.setAddress(addresses.get(0));
+		// }
+		// }
+		// catch (IOException e)
+		// {
+		// System.out.println("Exception caught! ******************************************");
+		// e.printStackTrace();
+		// }
 
 		DataEngine.addEvent(newEvent);
 	}

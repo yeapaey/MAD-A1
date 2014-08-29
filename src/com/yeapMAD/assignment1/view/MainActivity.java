@@ -1,7 +1,6 @@
 package com.yeapMAD.assignment1.view;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -21,6 +20,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.yeapMAD.assignment1.R;
+import com.yeapMAD.assignment1.controllers.AgendaViewLongClickListener;
 import com.yeapMAD.assignment1.controllers.ChangeMonthButtonListener;
 import com.yeapMAD.assignment1.controllers.MonthViewClickListener;
 import com.yeapMAD.assignment1.model.DataEngine;
@@ -28,7 +28,7 @@ import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class MainActivity extends Activity
 {
-	private EventsAgendaAdapter agendaAdapter;
+	private AbstractAdapter agendaAdapter;
 	private EventsMonthAdapter monthAdapter;
 
 	@Override
@@ -129,6 +129,7 @@ public class MainActivity extends Activity
 						Toast.LENGTH_SHORT).show();
 			}
 		});
+		agendaView.setOnItemLongClickListener(new AgendaViewLongClickListener(agendaAdapter));
 	}
 
 	// This view should really have its own manager to manage the different months etc.
@@ -137,7 +138,7 @@ public class MainActivity extends Activity
 		setContentView(R.layout.activity_main_month);
 		GridView monthView = (GridView) findViewById(R.id.events_month_list);
 		ListView dateList = (ListView) findViewById(R.id.events_month_date_list);
-		EventsDateListAdapter dateListAdapter = new EventsDateListAdapter(this, new ArrayList<PlannedEvent>());
+		AbstractAdapter dateListAdapter = new EventsDateListAdapter(this, new ArrayList<PlannedEvent>());
 		dateList.setAdapter(dateListAdapter);
 		
 		if (monthAdapter == null)
@@ -146,7 +147,7 @@ public class MainActivity extends Activity
 		}
 		
 		monthView.setAdapter(monthAdapter);
-		monthView.setOnItemClickListener(new MonthViewClickListener(dateListAdapter, monthAdapter));	
+		monthView.setOnItemClickListener(new MonthViewClickListener(monthAdapter, dateListAdapter));
 		
 		ChangeMonthButtonListener buttonListener = new ChangeMonthButtonListener(monthAdapter);
 		Button nextButton = (Button) findViewById(R.id.events_month_next_button);

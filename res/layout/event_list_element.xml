@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/event_list_date"
         android:hint="@string/hint_venue" />
-       
+ <!--       
 	<TextView 
 	    android:id="@+id/event_list_lat"
 	    android:layout_width="match_parent"
@@ -38,12 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/event_list_lat"
         android:hint="@string/hint_long"/>
-	
+	 -->
 	<TextView 
         android:id="@+id/event_list_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/event_list_long"
+        android:layout_below="@id/event_list_venue"
         android:hint="@string/hint_notes"/>
     
 

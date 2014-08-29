@@ -33,7 +33,8 @@ public class EventsMonthAdapter extends BaseAdapter
 		this.context = context;
 		monthGrid = new TreeMap<Integer, ArrayList<PlannedEvent>>();
 		setCurrentDate(GregorianCalendar.getInstance());
-		updateEvents(events); // Populate dates with appropriate events
+		// updateEvents(events); // Populate dates with appropriate events - Not needed, already called in
+		// setCurrentDate
 	}
 
 	
@@ -85,8 +86,7 @@ public class EventsMonthAdapter extends BaseAdapter
 	@Override
 	public Object getItem(int position)
 	{
-		
-		return monthGrid.get(position);
+		return monthGrid.get(++position);
 	}
 
 	@Override

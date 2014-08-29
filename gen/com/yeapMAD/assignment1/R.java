@@ -31,9 +31,9 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_add=0x7f090019;
-        public static final int action_event_edit_cancel=0x7f090018;
-        public static final int action_event_edit_done=0x7f090017;
+        public static final int action_add=0x7f090017;
+        public static final int action_event_edit_cancel=0x7f090016;
+        public static final int action_event_edit_done=0x7f090015;
         public static final int event_edit_date=0x7f090004;
         public static final int event_edit_end_time=0x7f090008;
         public static final int event_edit_label_date=0x7f090003;
@@ -41,13 +41,11 @@ public final class R {
         public static final int event_edit_label_to=0x7f090007;
         public static final int event_edit_start_time=0x7f090006;
         public static final int event_list_date=0x7f090011;
-        public static final int event_list_lat=0x7f090012;
-        public static final int event_list_long=0x7f090013;
-        public static final int event_list_note=0x7f090014;
+        public static final int event_list_note=0x7f090012;
         public static final int event_list_title=0x7f09000f;
         public static final int event_list_venue=0x7f090010;
-        public static final int event_month_dayNum=0x7f090015;
-        public static final int event_month_eventBool=0x7f090016;
+        public static final int event_month_dayNum=0x7f090013;
+        public static final int event_month_eventBool=0x7f090014;
         public static final int event_note=0x7f090002;
         public static final int event_title=0x7f090000;
         public static final int event_venue=0x7f090001;

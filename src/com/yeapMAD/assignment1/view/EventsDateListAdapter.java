@@ -1,77 +1,26 @@
 package com.yeapMAD.assignment1.view;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
-public class EventsDateListAdapter extends BaseAdapter
+public class EventsDateListAdapter extends AbstractAdapter
 {
-	private Collection<PlannedEvent> events;
 	private Context context;
-	
-	public EventsDateListAdapter(Context context, Collection<PlannedEvent> events)
+	private Collection<PlannedEvent> collection;
+
+	public EventsDateListAdapter(Context context, Collection<PlannedEvent> collection)
 	{
+		super(context, collection);
 		this.context = context;
-		this.events = events;
-	}
-	
-	public void updateEvents(Collection<PlannedEvent> events)
-	{
-		if (events == null)
-		{
-			System.out.println("events was null **********************");
-			events = new ArrayList<PlannedEvent>();
-		}
-		else 
-		{
-			this.events = events;
-		}
-	
-		notifyDataSetChanged();
-	}
-	
-	
-	@Override
-	public int getCount()
-	{
-		return events.size();
-	}
-
-	@Override
-	public Object getItem(int position)
-	{
-		Iterator<PlannedEvent> iter = events.iterator();
-		PlannedEvent event = null;
-		
-		if (position > getCount()) // out of bounds
-		{
-			System.out.println("returned a null item ***********************************************");
-			return null;
-		}
-		
-		for (int i = 0; i <= position; ++i)
-		{
-			System.out.println("iter.next() ***********************************************");
-			event = iter.next();
-		}
-		
-		return event;
-	}
-
-	@Override
-	public long getItemId(int position)
-	{
-		return position;
+		this.collection = collection;
 	}
 
 	@Override
