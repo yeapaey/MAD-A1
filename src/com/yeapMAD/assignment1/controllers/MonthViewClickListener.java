@@ -1,4 +1,4 @@
-package controllers;
+package com.yeapMAD.assignment1.controllers;
 
 import java.util.ArrayList;
 

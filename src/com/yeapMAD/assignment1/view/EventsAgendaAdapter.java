@@ -73,12 +73,12 @@ public class EventsAgendaAdapter extends BaseAdapter
 
 		PlannedEvent event = events.get(position);
 		title.setText(event.getTitle());
-		date.setText(dFormat.format(event.getCalendar().getTime()));
+		date.setText(dFormat.format(event.getDate().getTime()));
 
 		note.setText(event.getNote());
-		venue.setText(event.getStrAddress());
+		venue.setText(event.getVenue());
 
-		if (event.getAddress() != null)
+		if (event.getAddress().hasLatitude() && event.getAddress().hasLongitude())
 		{
 			Double latD = event.getAddress().getLatitude();
 			Double lonD = event.getAddress().getLongitude();

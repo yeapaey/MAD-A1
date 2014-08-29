@@ -2,65 +2,40 @@ package com.yeapMAD.assignment1.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.UUID;
 
 import android.location.Address;
 
 public class PlannedEvent implements Serializable
 {
+	private UUID id;
 	private String title;
-	private String note;
-	private Calendar calendar;
+	private String venue;
 	private Calendar startTime;
 	private Calendar endTime;
-	private String strAddress;
+	private String note;
 	private Address address;
 
-	// Need to sort out these constructors
-	public PlannedEvent(String title, String note, Calendar calendar)
+	public PlannedEvent(String title, String venue, Calendar startTime)
 	{
+		id = UUID.randomUUID();
 		this.title = title;
-		this.note = note;
-		this.calendar = calendar;
-		startTime = (Calendar) calendar.clone();
-
-		// Set up suitable start and end times
-		if (startTime.get(Calendar.MINUTE) <= 30)
-		{
-			startTime.set(Calendar.MINUTE, 30);
-		}
-		else
-		{
-			startTime.set(Calendar.MINUTE, 0);
-			startTime.roll(Calendar.HOUR_OF_DAY, 1);
-		}
-		
+		this.venue = venue;
+		this.startTime = startTime;
 		endTime = (Calendar) startTime.clone();
-		offsetTime(endTime, 60);
+		note = new String();
+		address = new Address(Locale.getDefault());
 	}
 
-	public PlannedEvent(String title, String note, Calendar calendar, String strAddress, Address address)
+	public PlannedEvent(String title, String venue, Calendar startTime, Calendar endTime, String note, Address address)
 	{
 		this.title = title;
+		this.venue = venue;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.note = note;
-		this.calendar = calendar;
-		this.strAddress = strAddress;
 		this.address = address;
-	}
-	
-
-
-	public void offsetTime(Calendar cal, int mins)
-	{
-		int result = cal.get(Calendar.MINUTE) + mins;
-		int hourRoll = (result) / 60;
-		if (result < 0) // I think this works
-		{
-			--hourRoll;
-		}
-		cal.roll(Calendar.MINUTE, mins);
-		cal.roll(Calendar.HOUR_OF_DAY, hourRoll);
-		
-		// Some code to update the view
 	}
 
 	public String getTitle()
@@ -73,24 +48,19 @@ public class PlannedEvent implements Serializable
 		this.title = title;
 	}
 
-	public String getNote()
+	public String getVenue()
 	{
-		return note;
+		return venue;
 	}
 
-	public void setNote(String notes)
+	public void setVenue(String venue)
 	{
-		this.note = notes;
+		this.venue = venue;
 	}
 
-	public Calendar getCalendar()
+	public Calendar getDate()
 	{
-		return calendar;
-	}
-
-	public void setCalendar(Calendar calendar)
-	{
-		this.calendar = calendar;
+		return startTime;
 	}
 
 	public Calendar getStartTime()
@@ -113,14 +83,14 @@ public class PlannedEvent implements Serializable
 		this.endTime = endTime;
 	}
 
-	public String getStrAddress()
+	public String getNote()
 	{
-		return strAddress;
+		return note;
 	}
 
-	public void setStrAddress(String strAddress)
+	public void setNote(String note)
 	{
-		this.strAddress = strAddress;
+		this.note = note;
 	}
 
 	public Address getAddress()
@@ -131,6 +101,11 @@ public class PlannedEvent implements Serializable
 	public void setAddress(Address address)
 	{
 		this.address = address;
+	}
+
+	public UUID getId()
+	{
+		return id;
 	}
 
 }

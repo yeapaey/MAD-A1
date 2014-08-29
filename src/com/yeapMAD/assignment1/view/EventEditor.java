@@ -17,16 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yeapMAD.assignment1.R;
+import com.yeapMAD.assignment1.controllers.DatePickerButtonListener;
+import com.yeapMAD.assignment1.controllers.TimePickerButtonListener;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
-
-import controllers.DatePickerButtonListener;
-import controllers.TimePickerButtonListener;
 
 public class EventEditor extends Activity
 {
@@ -40,45 +38,54 @@ public class EventEditor extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_editor);
-		newEvent = new PlannedEvent("", "", GregorianCalendar.getInstance());
 		timeFormatter = new SimpleDateFormat("hh:mm a");
 		dateFormatter = new SimpleDateFormat("dd MMM yyyy");
+
 		// Check if bundle has saved state and load if true, otherwise use defaults
+
 		Intent intent = getIntent();
-		PlannedEvent event = (PlannedEvent) intent.getSerializableExtra(PASSED_STATE);
+		PlannedEvent prevState = (PlannedEvent) intent.getSerializableExtra(PASSED_STATE);
 		
-		if (event != null)
+		if (prevState != null)
 		{
-			// Put all this stuff in a method
+			newEvent = prevState;
+
 			EditText title = (EditText) findViewById(R.id.event_title);
 			EditText venue = (EditText) findViewById(R.id.event_venue);
 			EditText note = (EditText) findViewById(R.id.event_note);
-			DatePicker date = (DatePicker) findViewById(R.id.event_edit_date);
-			Calendar cal = event.getCalendar();
-			
-			// Need to update newEvent with loaded data
-			
-			title.setText(event.getTitle());
-			venue.setText(event.getStrAddress());
-			note.setText(event.getNote());
-			date.updateDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+			title.setText(newEvent.getTitle());
+			venue.setText(newEvent.getVenue());
+			note.setText(newEvent.getNote());
 		}
 		else 
-		{	// Probably extract the listener into a controller, either one for each button or
-			// one controller to handle both buttons.  Constructor should take the calendar to be picked.
-			Button startTime = (Button) findViewById(R.id.event_edit_start_time);
-			Button endTime = (Button) findViewById(R.id.event_edit_end_time);
-			Button datePicker = (Button) findViewById(R.id.event_edit_date);
-
-			startTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getStartTime(), timeFormatter));
-			startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
-			endTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getEndTime(), timeFormatter));
-			endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
-			datePicker.setOnClickListener(new DatePickerButtonListener(this, newEvent.getCalendar(), dateFormatter));
-			datePicker.setText(dateFormatter.format(newEvent.getCalendar().getTime()));
-
+		{
+			newEvent = new PlannedEvent("", "", GregorianCalendar.getInstance());
+			// Set a suitable default start and end time
+			Calendar startTime = newEvent.getStartTime();
+			if (startTime.get(Calendar.MINUTE) <= 30)
+			{
+				startTime.set(Calendar.MINUTE, 30);
+			}
+			else
+			{
+				startTime.set(Calendar.MINUTE, 0);
+				startTime.roll(Calendar.HOUR_OF_DAY, 1);
+			}
+			offsetTime(newEvent.getEndTime(), 60);
 		}
-		
+
+		// All this needs to happen regardless of state loaded or not
+		Button datePicker = (Button) findViewById(R.id.event_edit_date);
+		datePicker.setOnClickListener(new DatePickerButtonListener(this, newEvent.getDate(), dateFormatter));
+		datePicker.setText(dateFormatter.format(newEvent.getDate().getTime()));
+
+		Button startTime = (Button) findViewById(R.id.event_edit_start_time);
+		startTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getStartTime(), timeFormatter));
+		startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
+
+		Button endTime = (Button) findViewById(R.id.event_edit_end_time);
+		endTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getEndTime(), timeFormatter));
+		endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
 	}
 
 	@Override
@@ -111,28 +118,26 @@ public class EventEditor extends Activity
 	// Should this go in an external controller???
 	public void onDoneClick(View view)
 	{
+		// This is all unnecessary now. NO!! Text fields still need to be done, unless
+		// code is written elsewhere to handle this
 		TextView title = (TextView) findViewById(R.id.event_title);
 		TextView note = (TextView) findViewById(R.id.event_note);
 		EditText venue = (EditText) findViewById(R.id.event_venue);
-		DatePicker datePicker = (DatePicker) findViewById(R.id.event_edit_date);
-		int year = datePicker.getYear();
-		int day = datePicker.getDayOfMonth();
-		int month = datePicker.getMonth();
 
-		System.out.println("onDoneClick... *****************************************");
+		newEvent.setTitle(title.getText().toString());
+		newEvent.setVenue(venue.getText().toString());
+		newEvent.setNote(note.getText().toString());
 
 		Geocoder geocoder = new Geocoder(getBaseContext());
 
-		String strVenue = venue.getText().toString();
-		List<Address> addy = new ArrayList<Address>();
+		List<Address> addresses = new ArrayList<Address>();
 		try
 		{
-			addy = geocoder.getFromLocationName(strVenue, 1);
-
-			System.out.println("Addy has " + addy.size() + " elements *****************************************");
-
-			// System.out.printf("%s: Lat = %l Long = %l ********************************\n ", s,
-			// addy.get(0).getLatitude(), addy.get(0).getLongitude());
+			addresses = geocoder.getFromLocationName(newEvent.getVenue(), 1);
+			if (!addresses.isEmpty())
+			{
+				newEvent.setAddress(addresses.get(0));
+			}
 		}
 		catch (IOException e)
 		{
@@ -140,9 +145,19 @@ public class EventEditor extends Activity
 			e.printStackTrace();
 		}
 
-		DataEngine.addEvent(title.getText().toString(), note.getText().toString(), new GregorianCalendar(year, month,
-				day), strVenue, (addy.size() > 0 ? addy.get(0) : null));
+		DataEngine.addEvent(newEvent);
+	}
 
+	public void offsetTime(Calendar cal, int mins)
+	{
+		int result = cal.get(Calendar.MINUTE) + mins;
+		int hourRoll = (result) / 60;
+		if (result < 0) // I think this works
+		{
+			--hourRoll;
+		}
+		cal.roll(Calendar.MINUTE, mins);
+		cal.roll(Calendar.HOUR_OF_DAY, hourRoll);
 	}
 
 	public PlannedEvent getNewEvent()

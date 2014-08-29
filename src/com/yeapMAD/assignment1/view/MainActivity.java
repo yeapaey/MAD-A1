@@ -21,11 +21,10 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.yeapMAD.assignment1.R;
+import com.yeapMAD.assignment1.controllers.ChangeMonthButtonListener;
+import com.yeapMAD.assignment1.controllers.MonthViewClickListener;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
-
-import controllers.ChangeMonthButtonListener;
-import controllers.MonthViewClickListener;
 
 public class MainActivity extends Activity
 {
