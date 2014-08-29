@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,11 +25,15 @@ import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
-public class EventEditor extends Activity implements Observer
+import controllers.DatePickerButtonListener;
+import controllers.TimePickerButtonListener;
+
+public class EventEditor extends Activity
 {
 	public static final String PASSED_STATE = "com.yeapMAD.assignment1.EventEditor.statePassed";
 	private PlannedEvent newEvent;
 	private DateFormat timeFormatter;
+	private DateFormat dateFormatter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +42,7 @@ public class EventEditor extends Activity implements Observer
 		setContentView(R.layout.activity_event_editor);
 		newEvent = new PlannedEvent("", "", GregorianCalendar.getInstance());
 		timeFormatter = new SimpleDateFormat("hh:mm a");
+		dateFormatter = new SimpleDateFormat("dd MMM yyyy");
 		// Check if bundle has saved state and load if true, otherwise use defaults
 		Intent intent = getIntent();
 		PlannedEvent event = (PlannedEvent) intent.getSerializableExtra(PASSED_STATE);
@@ -65,11 +68,15 @@ public class EventEditor extends Activity implements Observer
 			// one controller to handle both buttons.  Constructor should take the calendar to be picked.
 			Button startTime = (Button) findViewById(R.id.event_edit_start_time);
 			Button endTime = (Button) findViewById(R.id.event_edit_end_time);
+			Button datePicker = (Button) findViewById(R.id.event_edit_date);
 
 			startTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getStartTime(), timeFormatter));
 			startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
 			endTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getEndTime(), timeFormatter));
 			endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
+			datePicker.setOnClickListener(new DatePickerButtonListener(this, newEvent.getCalendar(), dateFormatter));
+			datePicker.setText(dateFormatter.format(newEvent.getCalendar().getTime()));
+
 		}
 		
 	}
@@ -142,15 +149,4 @@ public class EventEditor extends Activity implements Observer
 	{
 		return newEvent;
 	}
-
-	@Override
-	public void update(Observable observable, Object data)
-	{
-		Button startTime = (Button) findViewById(R.id.event_edit_start_time);
-		Button endTime = (Button) findViewById(R.id.event_edit_end_time);
-
-		startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
-		endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
-	}
-
 }

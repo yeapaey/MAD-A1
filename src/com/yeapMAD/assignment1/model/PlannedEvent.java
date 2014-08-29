@@ -1,13 +1,11 @@
 package com.yeapMAD.assignment1.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Observable;
 
 import android.location.Address;
 
-public class PlannedEvent extends Observable implements Serializable
+public class PlannedEvent implements Serializable
 {
 	private String title;
 	private String note;
@@ -28,20 +26,12 @@ public class PlannedEvent extends Observable implements Serializable
 		// Set up suitable start and end times
 		if (startTime.get(Calendar.MINUTE) <= 30)
 		{
-			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
-					+ "*********************");
 			startTime.set(Calendar.MINUTE, 30);
-			System.out.println("startTime is now" + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
-					+ "*********************");
 		}
 		else
 		{
-			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
-					+ "*********************");
 			startTime.set(Calendar.MINUTE, 0);
 			startTime.roll(Calendar.HOUR_OF_DAY, 1);
-			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
-					+ "*********************");
 		}
 		
 		endTime = (Calendar) startTime.clone();
