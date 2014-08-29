@@ -7,19 +7,16 @@
     <string name="events_month_previous">Prev</string>
     <string name="events_month_next">Next</string>
     <string name="label_from">From</string>
-    <string name="label_to">To</string>
+    <string name="label_to">to</string>
     <string name="label_date">Date</string>
-    
-    
-<!-- ACTION BAR ACTIONS -->
-	<string name="action_done">Done</string>    
-	<string name="action_add">Add</string>
-	<string name="action_cancel">Cancel</string>
-    
-    
-    
-<!-- HINTS -->
-    
+
+    <!-- ACTION BAR ACTIONS -->
+    <string name="action_done">Done</string>
+    <string name="action_add">Add</string>
+    <string name="action_cancel">Cancel</string>
+
+    <!-- HINTS -->
+
     <string name="hint_title">Title</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
@@ -29,7 +26,8 @@
     <string name="hint_long">Longitude</string>
     <string name="hint_start_time">start time</string>
     <string name="hint_end_time">end time</string>
-    
-    
+    <string name="title_activity_single_event_view">SingleEventView</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

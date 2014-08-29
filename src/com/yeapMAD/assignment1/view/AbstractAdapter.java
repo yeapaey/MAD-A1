@@ -4,19 +4,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import android.content.Context;
+import android.app.Activity;
 import android.widget.BaseAdapter;
 
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public abstract class AbstractAdapter extends BaseAdapter
 {
-	private Context context;
+	@SuppressWarnings("unused")
+	private Activity activity;
 	private Collection<PlannedEvent> collection;
 
-	public AbstractAdapter(Context context, Collection<PlannedEvent> collection)
+	public AbstractAdapter(Activity activity, Collection<PlannedEvent> collection)
 	{
-		this.context = context;
+		this.activity = activity;
 		this.collection = collection;
 	}
 

@@ -12,7 +12,7 @@ public class DataEngine extends Application
 	{
 		super();
 		events = new LinkedList<PlannedEvent>();
-		DummyData.generateEvents(events);
+		// DummyData.generateEvents(events);
 	}
 
 	public static void addEvent(PlannedEvent newEvent)

@@ -1,9 +1,9 @@
 package com.yeapMAD.assignment1.view;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +14,12 @@ import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class EventsAgendaAdapter extends AbstractAdapter
 {
-	// private Collection<PlannedEvent> collection;
-	private Context context;
+	private Activity activity;
 
-	public EventsAgendaAdapter(Context context, Collection<PlannedEvent> collection)
+	public EventsAgendaAdapter(Activity activity, Collection<PlannedEvent> collection)
 	{
-		super(context, collection);
-		this.context = context;
+		super(activity, collection);
+		this.activity = activity;
 	}
 
 	@Override
@@ -28,31 +27,27 @@ public class EventsAgendaAdapter extends AbstractAdapter
 	{
 		if (convertView == null)
 		{
-			convertView = LayoutInflater.from(context).inflate(R.layout.event_list_element, parent, false);
+			convertView = LayoutInflater.from(activity).inflate(R.layout.event_list_element, parent, false);
 		}
 
 		TextView title = (TextView) convertView.findViewById(R.id.event_list_title);
 		TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
+		TextView startTime = (TextView) convertView.findViewById(R.id.event_start_time);
+		TextView endTime = (TextView) convertView.findViewById(R.id.event_end_time);
 		TextView note = (TextView) convertView.findViewById(R.id.event_list_note);
 		TextView venue = (TextView) convertView.findViewById(R.id.event_list_venue);
-		// TextView lat = (TextView) convertView.findViewById(R.id.event_list_lat);
-		// TextView lon = (TextView) convertView.findViewById(R.id.event_list_long);
-		DateFormat dFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy '-' ");
+		SimpleDateFormat timeFormat = new SimpleDateFormat("hh':'mm aa");
 
 		PlannedEvent event = (PlannedEvent) getItem(position);
 		title.setText(event.getTitle());
-		date.setText(dFormat.format(event.getDate().getTime()));
+		date.setText(dateFormat.format(event.getDate().getTime()));
+		startTime.setText(timeFormat.format(event.getStartTime().getTime()));
+		endTime.setText(timeFormat.format(event.getEndTime().getTime()));
 
 		note.setText(event.getNote());
 		venue.setText(event.getVenue());
-
-		// if (event.getAddress().hasLatitude() && event.getAddress().hasLongitude())
-		// {
-		// Double latD = event.getAddress().getLatitude();
-		// Double lonD = event.getAddress().getLongitude();
-		// lat.setText(latD.toString());
-		// lon.setText(lonD.toString());
-		// }
 
 		return convertView;
 	}

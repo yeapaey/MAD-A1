@@ -2,11 +2,9 @@ package com.yeapMAD.assignment1.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.UUID;
 
-import android.location.Address;
-
+@SuppressWarnings("serial")
 public class PlannedEvent implements Serializable
 {
 	private UUID id;
@@ -17,11 +15,11 @@ public class PlannedEvent implements Serializable
 	private String note;
 //	private Address address;
 
-	public PlannedEvent(String title, String venue, Calendar startTime)
+	public PlannedEvent(Calendar startTime)
 	{
 		id = UUID.randomUUID();
-		this.title = title;
-		this.venue = venue;
+		this.title = new String();
+		this.venue = new String();
 		this.startTime = startTime;
 		endTime = (Calendar) startTime.clone();
 		note = new String();

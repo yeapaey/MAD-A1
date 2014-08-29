@@ -2,13 +2,13 @@ package com.yeapMAD.assignment1.view;
 
 import java.util.Calendar;
 
-import com.yeapMAD.assignment1.controllers.DatePickerButtonListener;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
+
+import com.yeapMAD.assignment1.controllers.DatePickerButtonListener;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
@@ -29,7 +29,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 
 		DatePickerDialog dialog = new DatePickerDialog(getActivity(), this, year, month, day);
-		dialog.getDatePicker().setSpinnersShown(false);
+		dialog.getDatePicker().setSpinnersShown(true);
+		dialog.getDatePicker().setCalendarViewShown(false);
+
 		return dialog;
 	}
 

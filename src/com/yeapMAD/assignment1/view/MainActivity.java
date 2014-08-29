@@ -9,26 +9,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
 import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.controllers.AgendaViewLongClickListener;
 import com.yeapMAD.assignment1.controllers.ChangeMonthButtonListener;
 import com.yeapMAD.assignment1.controllers.MonthViewClickListener;
+import com.yeapMAD.assignment1.controllers.MonthViewLongClickListener;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class MainActivity extends Activity
 {
 	private AbstractAdapter agendaAdapter;
+	private AbstractAdapter dateListAdapter;
 	private EventsMonthAdapter monthAdapter;
 
 	@Override
@@ -38,11 +36,11 @@ public class MainActivity extends Activity
 
 		agendaAdapter = new EventsAgendaAdapter(this, DataEngine.getEvents());
 		monthAdapter = null;
+		dateListAdapter = null;
 
 		SpinnerAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.string_array_display_modes,
 				android.R.layout.simple_dropdown_item_1line);
 
-		// Put in separate class?
 		OnNavigationListener onNavListener = new OnNavigationListener()
 		{
 			@SuppressWarnings("unused")
@@ -88,6 +86,11 @@ public class MainActivity extends Activity
 		{
 			monthAdapter.updateEvents(DataEngine.getEvents());
 		}
+		if (dateListAdapter != null)
+		{
+			dateListAdapter.updateEvents(DataEngine.getEvents());
+		}
+
 	}
 
 	@Override
@@ -120,19 +123,9 @@ public class MainActivity extends Activity
 		}
 
 		agendaView.setAdapter(agendaAdapter);
-		agendaView.setOnItemClickListener(new OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				Toast.makeText(parent.getContext(), "Pressed Item" + ((Integer) position).toString(),
-						Toast.LENGTH_SHORT).show();
-			}
-		});
 		agendaView.setOnItemLongClickListener(new AgendaViewLongClickListener(agendaAdapter));
 	}
 
-	// This view should really have its own manager to manage the different months etc.
 	private void launchMonthView()
 	{
 		setContentView(R.layout.activity_main_month);
@@ -140,14 +133,16 @@ public class MainActivity extends Activity
 		ListView dateList = (ListView) findViewById(R.id.events_month_date_list);
 		AbstractAdapter dateListAdapter = new EventsDateListAdapter(this, new ArrayList<PlannedEvent>());
 		dateList.setAdapter(dateListAdapter);
+		dateList.setOnItemLongClickListener(new AgendaViewLongClickListener(dateListAdapter));
 		
 		if (monthAdapter == null)
 		{
-			monthAdapter = new EventsMonthAdapter(getBaseContext(), DataEngine.getEvents());
+			monthAdapter = new EventsMonthAdapter(this, DataEngine.getEvents());
 		}
 		
 		monthView.setAdapter(monthAdapter);
 		monthView.setOnItemClickListener(new MonthViewClickListener(monthAdapter, dateListAdapter));
+		monthView.setOnItemLongClickListener(new MonthViewLongClickListener(monthAdapter));
 		
 		ChangeMonthButtonListener buttonListener = new ChangeMonthButtonListener(monthAdapter);
 		Button nextButton = (Button) findViewById(R.id.events_month_next_button);

@@ -2,7 +2,7 @@ package com.yeapMAD.assignment1.view;
 
 import java.util.Collection;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +13,12 @@ import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class EventsDateListAdapter extends AbstractAdapter
 {
-	private Context context;
-	private Collection<PlannedEvent> collection;
+	private Activity activity;
 
-	public EventsDateListAdapter(Context context, Collection<PlannedEvent> collection)
+	public EventsDateListAdapter(Activity activity, Collection<PlannedEvent> collection)
 	{
-		super(context, collection);
-		this.context = context;
-		this.collection = collection;
+		super(activity, collection);
+		this.activity = activity;
 	}
 
 	@Override
@@ -28,7 +26,7 @@ public class EventsDateListAdapter extends AbstractAdapter
 	{
 		if (convertView == null)
 		{
-			convertView = LayoutInflater.from(context).inflate(R.layout.event_date_list_element, parent, false);
+			convertView = LayoutInflater.from(activity).inflate(R.layout.event_date_list_element, parent, false);
 		}
 		
 		TextView title = (TextView) convertView.findViewById(R.id.event_list_title);
@@ -37,7 +35,6 @@ public class EventsDateListAdapter extends AbstractAdapter
 		PlannedEvent event = (PlannedEvent) getItem(position);
 		if (event == null)
 		{
-			System.out.println("returned a null view ***********************************************");
 			return null;
 		}
 		

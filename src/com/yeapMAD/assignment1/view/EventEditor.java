@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class EventEditor extends Activity
 	private DateFormat dateFormatter;
 	private int defaultEventLength;
 	
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -55,7 +57,7 @@ public class EventEditor extends Activity
 		}
 		else 
 		{
-			newEvent = new PlannedEvent("", "", GregorianCalendar.getInstance());
+			newEvent = new PlannedEvent(GregorianCalendar.getInstance());
 			// Set a suitable default start and end time
 			int startMinute = newEvent.getStartTime().get(Calendar.MINUTE);
 			int offset;
@@ -112,11 +114,8 @@ public class EventEditor extends Activity
 	}
 	
 	
-	// Should this go in an external controller???
 	public void onDoneClick(View view)
 	{
-		// This is all unnecessary now. NO!! Text fields still need to be done, unless
-		// code is written elsewhere to handle this
 		TextView title = (TextView) findViewById(R.id.event_title);
 		TextView note = (TextView) findViewById(R.id.event_note);
 		EditText venue = (EditText) findViewById(R.id.event_venue);
