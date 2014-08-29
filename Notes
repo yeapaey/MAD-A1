@@ -29,5 +29,9 @@
 		* AgendaView - list 
 		* Month View - gridView and ListView below
 	* Making the adapters observers that observe the DataEngine would be ideal so that the automatically update.
+<<<<<<< HEAD
+=======
+	* Address is an Android package and not serializable, so had to remove to pass things to EventEditor
+>>>>>>> origin/MonthView
 	
 * Do Different views first with basic Event data, then do EditEvent Activity and associated functionality. 

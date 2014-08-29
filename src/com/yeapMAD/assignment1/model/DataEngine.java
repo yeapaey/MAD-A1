@@ -12,7 +12,11 @@ public class DataEngine extends Application
 	{
 		super();
 		events = new LinkedList<PlannedEvent>();
+<<<<<<< HEAD
 		DummyData.generateEvents(events);
+=======
+		// DummyData.generateEvents(events);
+>>>>>>> origin/MonthView
 	}
 
 	public static void addEvent(PlannedEvent newEvent)

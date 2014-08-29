@@ -5,32 +5,27 @@ import java.util.ArrayList;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Toast;
 
 import com.yeapMAD.assignment1.model.PlannedEvent;
-import com.yeapMAD.assignment1.view.EventsDateListAdapter;
+import com.yeapMAD.assignment1.view.AbstractAdapter;
 import com.yeapMAD.assignment1.view.EventsMonthAdapter;
 
 public class MonthViewClickListener implements OnItemClickListener
 {
-	private EventsDateListAdapter listAdapter;
-	private EventsMonthAdapter monthAdapter;
+	private EventsMonthAdapter origin;
+	private AbstractAdapter destination;
 	
-	public MonthViewClickListener(EventsDateListAdapter listAdapter, EventsMonthAdapter monthAdapter)
+	public MonthViewClickListener(EventsMonthAdapter origin, AbstractAdapter destination)
 	{
-		this.listAdapter = listAdapter;
-		this.monthAdapter = monthAdapter;
+		this.origin = origin;
+		this.destination = destination;
 	}
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-		Integer pos = ++position;
 		@SuppressWarnings("unchecked")
-		ArrayList<PlannedEvent> events = (ArrayList<PlannedEvent>) monthAdapter.getItem(position);
-		listAdapter.updateEvents(events);
-
-		
+		ArrayList<PlannedEvent> events = (ArrayList<PlannedEvent>) origin.getItem(position);
+		destination.updateEvents(events);
 	}
-
 }
