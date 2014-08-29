@@ -44,7 +44,6 @@ public class EventEditor extends Activity
 		defaultEventLength = 60;
 
 		// Check if bundle has saved state and load if true, otherwise use defaults
-
 		Intent intent = getIntent();
 		PlannedEvent prevState = (PlannedEvent) intent.getSerializableExtra(PASSED_STATE);
 		
