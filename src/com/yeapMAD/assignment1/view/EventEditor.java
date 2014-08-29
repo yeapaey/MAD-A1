@@ -32,6 +32,7 @@ public class EventEditor extends Activity
 	private PlannedEvent newEvent;
 	private DateFormat timeFormatter;
 	private DateFormat dateFormatter;
+	private int defaultEventLength;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +41,7 @@ public class EventEditor extends Activity
 		setContentView(R.layout.activity_event_editor);
 		timeFormatter = new SimpleDateFormat("hh:mm a");
 		dateFormatter = new SimpleDateFormat("dd MMM yyyy");
+		defaultEventLength = 60;
 
 		// Check if bundle has saved state and load if true, otherwise use defaults
 
@@ -61,17 +63,18 @@ public class EventEditor extends Activity
 		{
 			newEvent = new PlannedEvent("", "", GregorianCalendar.getInstance());
 			// Set a suitable default start and end time
-			Calendar startTime = newEvent.getStartTime();
-			if (startTime.get(Calendar.MINUTE) <= 30)
+			int startMinute = newEvent.getStartTime().get(Calendar.MINUTE);
+			int offset;
+			if (startMinute <= 30)
 			{
-				startTime.set(Calendar.MINUTE, 30);
+				offset = 30 - startMinute;
 			}
 			else
 			{
-				startTime.set(Calendar.MINUTE, 0);
-				startTime.roll(Calendar.HOUR_OF_DAY, 1);
+				offset = 60 - startMinute;
 			}
-			offsetTime(newEvent.getEndTime(), 60);
+			offsetTime(newEvent.getStartTime(), offset);
+			offsetTime(newEvent.getEndTime(), offset + defaultEventLength);
 		}
 
 		// All this needs to happen regardless of state loaded or not
