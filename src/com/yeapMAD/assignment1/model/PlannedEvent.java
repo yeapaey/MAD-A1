@@ -1,11 +1,13 @@
 package com.yeapMAD.assignment1.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Observable;
 
 import android.location.Address;
 
-public class PlannedEvent implements Serializable
+public class PlannedEvent extends Observable implements Serializable
 {
 	private String title;
 	private String note;
@@ -15,27 +17,35 @@ public class PlannedEvent implements Serializable
 	private String strAddress;
 	private Address address;
 
+	// Need to sort out these constructors
 	public PlannedEvent(String title, String note, Calendar calendar)
 	{
 		this.title = title;
 		this.note = note;
 		this.calendar = calendar;
-		startTime = calendar;
-				
+		startTime = (Calendar) calendar.clone();
+
+		// Set up suitable start and end times
 		if (startTime.get(Calendar.MINUTE) <= 30)
 		{
+			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
+					+ "*********************");
 			startTime.set(Calendar.MINUTE, 30);
+			System.out.println("startTime is now" + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
+					+ "*********************");
 		}
 		else
 		{
+			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
+					+ "*********************");
 			startTime.set(Calendar.MINUTE, 0);
 			startTime.roll(Calendar.HOUR_OF_DAY, 1);
+			System.out.println("startTime is " + new SimpleDateFormat("hh:mm a").format(startTime.getTime())
+					+ "*********************");
 		}
 		
-		endTime = startTime;
+		endTime = (Calendar) startTime.clone();
 		offsetTime(endTime, 60);
-				
-				
 	}
 
 	public PlannedEvent(String title, String note, Calendar calendar, String strAddress, Address address)
@@ -47,6 +57,8 @@ public class PlannedEvent implements Serializable
 		this.address = address;
 	}
 	
+
+
 	public void offsetTime(Calendar cal, int mins)
 	{
 		int result = cal.get(Calendar.MINUTE) + mins;

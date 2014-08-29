@@ -25,6 +25,7 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="wrap_content"
 		    android:hint="@string/hint_venue"/>
+		
 		<EditText 
 		    android:id="@+id/event_note"
 		    android:layout_below="@id/event_venue"
@@ -40,31 +41,51 @@
 	 	    android:layout_below="@id/event_note" 
 	 	    android:layout_centerHorizontal="true" />
 		
+		<TextView 
+		    android:id="@+id/event_edit_label_from"
+		    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	 	    android:layout_below="@id/event_edit_date"
+	 	    android:layout_alignParentLeft="true"
+	 	    android:text="@string/label_from"/>
+		
 		<Button 
 		    android:id="@+id/event_edit_start_time"
 		    android:layout_width="wrap_content"
 	 	    android:layout_height="wrap_content"
 	 	    android:layout_below="@id/event_edit_date"
-	 	    android:layout_alignParentLeft="true"
+	 	    android:layout_toRightOf="@id/event_edit_label_from"
 	 	    android:hint="@string/hint_start_time"
 	 	    style="@android:style/Widget.TextView.SpinnerItem"/>
-<!-- 	 	
-	 	<TimePicker 
-	 	    android:id="@+id/event_time"
-	 	    android:layout_width="wrap_content"
+		
+		<TextView 
+		    android:id="@+id/event_edit_label_to"
+		    android:layout_width="wrap_content"
 	 	    android:layout_height="wrap_content"
-	 	    android:layout_below="@id/event_note"
-	 	    android:layout_toRightOf="@id/event_edit_date"
-	 	    android:layout_alignParentRight="true" />
-	 -->
+	 	    android:layout_below="@id/event_edit_start_time"
+	 	    android:layout_alignParentLeft="true"
+	 	    android:text="@string/label_to"/>
+		
+		<Button 
+		    android:id="@+id/event_edit_end_time"
+		    android:layout_width="wrap_content"
+	 	    android:layout_height="wrap_content"
+	 	    android:layout_below="@id/event_edit_start_time"
+	 	    android:layout_toRightOf="@id/event_edit_label_to"
+	 	    android:hint="@string/hint_end_time"
+	 	    style="@android:style/Widget.TextView.SpinnerItem"/>
+
 		<Button 
 		    android:id="@+id/test_button"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
+		    android:layout_below="@id/event_edit_end_time"
 		    android:layout_alignParentBottom="true"
 		    android:layout_alignParentRight="true"
 		    android:text="@string/event_test_button" 
 		    android:onClick="onDoneClick" />
+		
+
 	
  	</RelativeLayout>
 </ScrollView>

@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -17,7 +18,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,7 +27,7 @@ import com.yeapMAD.assignment1.R;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
 
-public class EventEditor extends Activity
+public class EventEditor extends Activity implements Observer
 {
 	public static final String PASSED_STATE = "com.yeapMAD.assignment1.EventEditor.statePassed";
 	private PlannedEvent newEvent;
@@ -64,16 +64,12 @@ public class EventEditor extends Activity
 		{	// Probably extract the listener into a controller, either one for each button or
 			// one controller to handle both buttons.  Constructor should take the calendar to be picked.
 			Button startTime = (Button) findViewById(R.id.event_edit_start_time);
-			startTime.setOnClickListener(new OnClickListener()
-			{
-				@Override
-				public void onClick(View view)
-				{
-					showTimePickerDialog(view);
-				}
-			});
-			
+			Button endTime = (Button) findViewById(R.id.event_edit_end_time);
+
+			startTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getStartTime(), timeFormatter));
 			startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
+			endTime.setOnClickListener(new TimePickerButtonListener(this, newEvent.getEndTime(), timeFormatter));
+			endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
 		}
 		
 	}
@@ -105,12 +101,6 @@ public class EventEditor extends Activity
 	}
 	
 	
-	public void showTimePickerDialog(View view)
-	{
-		DialogFragment newFragment = new TimePickerFragment(newEvent.getStartTime());
-		newFragment.show(getFragmentManager(), "timePicker");
-	}
-
 	// Should this go in an external controller???
 	public void onDoneClick(View view)
 	{
@@ -152,7 +142,15 @@ public class EventEditor extends Activity
 	{
 		return newEvent;
 	}
-	
-	
+
+	@Override
+	public void update(Observable observable, Object data)
+	{
+		Button startTime = (Button) findViewById(R.id.event_edit_start_time);
+		Button endTime = (Button) findViewById(R.id.event_edit_end_time);
+
+		startTime.setText(timeFormatter.format(newEvent.getStartTime().getTime()));
+		endTime.setText(timeFormatter.format(newEvent.getEndTime().getTime()));
+	}
 
 }

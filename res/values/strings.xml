@@ -6,6 +6,8 @@
     <string name="event_test_button">Add Guest</string>
     <string name="events_month_previous">Prev</string>
     <string name="events_month_next">Next</string>
+    <string name="label_from">From</string>
+    <string name="label_to">To</string>
     
     
 <!-- ACTION BAR ACTIONS -->
