@@ -1,6 +1,7 @@
 package com.yeapMAD.assignment1.view;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
@@ -20,11 +21,10 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.yeapMAD.assignment1.R;
+import com.yeapMAD.assignment1.controllers.ChangeMonthButtonListener;
+import com.yeapMAD.assignment1.controllers.MonthViewClickListener;
 import com.yeapMAD.assignment1.model.DataEngine;
 import com.yeapMAD.assignment1.model.PlannedEvent;
-
-import controllers.ChangeMonthButtonListener;
-import controllers.MonthViewClickListener;
 
 public class MainActivity extends Activity
 {
@@ -153,6 +153,5 @@ public class MainActivity extends Activity
 		Button prevButton = (Button) findViewById(R.id.events_month_previous_button);
 		nextButton.setOnClickListener(buttonListener);
 		prevButton.setOnClickListener(buttonListener);
-
 	}
 }

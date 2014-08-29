@@ -1,30 +1,40 @@
 package com.yeapMAD.assignment1.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.UUID;
 
 import android.location.Address;
 
-public class PlannedEvent
+public class PlannedEvent implements Serializable
 {
+	private UUID id;
 	private String title;
+	private String venue;
+	private Calendar startTime;
+	private Calendar endTime;
 	private String note;
-	private Calendar calendar;
-	private String strAddress;
 	private Address address;
 
-	public PlannedEvent(String title, String note, Calendar calendar)
+	public PlannedEvent(String title, String venue, Calendar startTime)
 	{
+		id = UUID.randomUUID();
 		this.title = title;
-		this.note = note;
-		this.calendar = calendar;
+		this.venue = venue;
+		this.startTime = startTime;
+		endTime = (Calendar) startTime.clone();
+		note = new String();
+		address = new Address(Locale.getDefault());
 	}
 
-	public PlannedEvent(String title, String note, Calendar calendar, String strAddress, Address address)
+	public PlannedEvent(String title, String venue, Calendar startTime, Calendar endTime, String note, Address address)
 	{
 		this.title = title;
+		this.venue = venue;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.note = note;
-		this.calendar = calendar;
-		this.strAddress = strAddress;
 		this.address = address;
 	}
 
@@ -38,34 +48,49 @@ public class PlannedEvent
 		this.title = title;
 	}
 
+	public String getVenue()
+	{
+		return venue;
+	}
+
+	public void setVenue(String venue)
+	{
+		this.venue = venue;
+	}
+
+	public Calendar getDate()
+	{
+		return startTime;
+	}
+
+	public Calendar getStartTime()
+	{
+		return startTime;
+	}
+
+	public void setStartTime(Calendar startTime)
+	{
+		this.startTime = startTime;
+	}
+
+	public Calendar getEndTime()
+	{
+		return endTime;
+	}
+
+	public void setEndTime(Calendar endTime)
+	{
+		this.endTime = endTime;
+	}
+
 	public String getNote()
 	{
 		return note;
 	}
 
-	public void setNote(String notes)
+	public void setNote(String note)
 	{
-		this.note = notes;
-	}
-
-	public Calendar getCalendar()
-	{
-		return calendar;
-	}
-
-	public void setCalendar(Calendar calendar)
-	{
-		this.calendar = calendar;
-	}
-
-	public String getStrAddress()
-	{
-		return strAddress;
-	}
-
-	public void setStrAddress(String strAddress)
-	{
-		this.strAddress = strAddress;
+		this.note = note;
 	}
 
 	public Address getAddress()
@@ -76,6 +101,11 @@ public class PlannedEvent
 	public void setAddress(Address address)
 	{
 		this.address = address;
+	}
+
+	public UUID getId()
+	{
+		return id;
 	}
 
 }

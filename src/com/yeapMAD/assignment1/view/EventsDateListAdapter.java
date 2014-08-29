@@ -93,7 +93,7 @@ public class EventsDateListAdapter extends BaseAdapter
 		}
 		
 		title.setText(event.getTitle());
-		venue.setText(event.getStrAddress());
+		venue.setText(event.getVenue());
 		
 		return convertView;
 	}

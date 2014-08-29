@@ -1,10 +1,8 @@
 package com.yeapMAD.assignment1.model;
 
-import java.util.Calendar;
 import java.util.LinkedList;
 
 import android.app.Application;
-import android.location.Address;
 
 public class DataEngine extends Application
 {
@@ -17,27 +15,25 @@ public class DataEngine extends Application
 		DummyData.generateEvents(events);
 	}
 
-	public static void addEvent(String title, String notes, Calendar calendar, String strAddress, Address address)
+	public static void addEvent(PlannedEvent newEvent)
 	{
-		int i;
-		for (i = 0; calendar.after(events.get(i).getCalendar()); ++i)
+		int iter;
+		for (iter = 0; newEvent.getDate().after(events.get(iter).getDate()); ++iter)
 		{
 		}
 
-		if (i == events.size())
+		if (iter == events.size())
 		{
-			events.addLast(new PlannedEvent(title, notes, calendar, strAddress, address));
+			events.addLast(newEvent);
 		}
 		else
 		{
-			events.add(i, new PlannedEvent(title, notes, calendar, strAddress, address));
+			events.add(iter, newEvent);
 		}
-
 	}
 
 	public static LinkedList<PlannedEvent> getEvents()
 	{
 		return events;
 	}
-
 }

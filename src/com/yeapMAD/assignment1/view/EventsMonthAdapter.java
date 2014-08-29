@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -22,7 +21,6 @@ import com.yeapMAD.assignment1.model.PlannedEvent;
 
 public class EventsMonthAdapter extends BaseAdapter
 {
-
 	private Context context;
 	private int year;
 	private int month;
@@ -66,7 +64,7 @@ public class EventsMonthAdapter extends BaseAdapter
 		
 		for (PlannedEvent event : events)
 		{
-			Calendar eCal = event.getCalendar();
+			Calendar eCal = event.getDate();
 			if (eCal.get(Calendar.YEAR) == year && eCal.get(Calendar.MONTH) == month)
 			{
 				List<PlannedEvent> list = monthGrid.get(eCal.get(Calendar.DAY_OF_MONTH));
