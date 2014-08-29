@@ -26,8 +26,5 @@
     <string name="hint_long">Longitude</string>
     <string name="hint_start_time">start time</string>
     <string name="hint_end_time">end time</string>
-    <string name="title_activity_single_event_view">SingleEventView</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
 </resources>

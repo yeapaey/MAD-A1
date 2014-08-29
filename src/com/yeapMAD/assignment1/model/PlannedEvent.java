@@ -13,7 +13,6 @@ public class PlannedEvent implements Serializable
 	private Calendar startTime;
 	private Calendar endTime;
 	private String note;
-//	private Address address;
 
 	public PlannedEvent(Calendar startTime)
 	{
@@ -35,6 +34,7 @@ public class PlannedEvent implements Serializable
 		this.endTime = endTime;
 		this.note = note;
 //		this.address = address;
+
 	}
 
 	public String getTitle()

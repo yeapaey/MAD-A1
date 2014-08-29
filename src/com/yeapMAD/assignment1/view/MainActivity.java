@@ -90,7 +90,6 @@ public class MainActivity extends Activity
 		{
 			dateListAdapter.updateEvents(DataEngine.getEvents());
 		}
-
 	}
 
 	@Override

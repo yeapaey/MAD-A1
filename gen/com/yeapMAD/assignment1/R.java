@@ -37,7 +37,6 @@ public final class R {
         public static final int action_add=0x7f09001c;
         public static final int action_event_edit_cancel=0x7f09001b;
         public static final int action_event_edit_done=0x7f09001a;
-        public static final int action_settings=0x7f09001d;
         public static final int event_current_month=0x7f09000c;
         public static final int event_date=0x7f090010;
         public static final int event_edit_date=0x7f090004;
@@ -77,7 +76,6 @@ public final class R {
     public static final class menu {
         public static final int event_editor=0x7f080000;
         public static final int main=0x7f080001;
-        public static final int single_event_view=0x7f080002;
     }
     public static final class string {
         public static final int action_add=0x7f060009;
@@ -85,12 +83,10 @@ public final class R {
         /**  ACTION BAR ACTIONS 
          */
         public static final int action_done=0x7f060008;
-        public static final int action_settings=0x7f060016;
         public static final int app_name=0x7f060000;
         public static final int event_test_button=0x7f060002;
         public static final int events_month_next=0x7f060004;
         public static final int events_month_previous=0x7f060003;
-        public static final int hello_world=0x7f060015;
         public static final int hint_date=0x7f06000c;
         public static final int hint_end_time=0x7f060013;
         public static final int hint_lat=0x7f060010;
@@ -106,7 +102,6 @@ public final class R {
         public static final int label_from=0x7f060005;
         public static final int label_to=0x7f060006;
         public static final int title_activity_event_editor=0x7f060001;
-        public static final int title_activity_single_event_view=0x7f060014;
     }
     public static final class style {
         /** 

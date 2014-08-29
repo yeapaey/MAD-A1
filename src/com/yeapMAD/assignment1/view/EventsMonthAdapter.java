@@ -73,6 +73,7 @@ public class EventsMonthAdapter extends BaseAdapter
 				// Sort list here
 			}
 		}
+
 		TextView month = (TextView) activity.findViewById(R.id.event_current_month);
 		SimpleDateFormat formatter = new SimpleDateFormat("MMMM");
 		month.setText(formatter.format(present.getTime()));
@@ -126,5 +127,4 @@ public class EventsMonthAdapter extends BaseAdapter
 	{
 		return month;
 	}
-
 }
