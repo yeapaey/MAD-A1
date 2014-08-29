@@ -4,6 +4,9 @@
 	* Email addresses for contacts - need to be able to get them from Contacts app
 	* Venue/Location - user types in Venue (String), this is passed to Google Maps (use class Geocoder) and lat/long is returned and stored
 	* Done/Cancel in action bar
+	* ***********************
+	* Have to re-do everything related to calendar to work with startTime and endTime instead of calendar
+	* only allow one date for the wo times, no events that go over two (or more) different days
 
 * Agenda View
 	* Set up adapter

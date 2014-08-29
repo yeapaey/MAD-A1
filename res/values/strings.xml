@@ -24,6 +24,8 @@
     <string name="hint_venue">Venue</string>
     <string name="hint_lat">Latitude</string>
     <string name="hint_long">Longitude</string>
+    <string name="hint_start_time">start time</string>
+    <string name="hint_end_time">end time</string>
     
     
 
