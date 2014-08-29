@@ -9,6 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:textSize="@dimen/event_title"
+        android:paddingTop="@dimen/standard_padding"
+        android:paddingLeft="@dimen/month_grid_padding"
         android:hint="@string/hint_title"/>
 	
 	<TextView 
@@ -16,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/event_list_title"
+        android:textSize="@dimen/default_text_size"
+        android:paddingLeft="@dimen/month_grid_padding"
         android:hint="@string/hint_venue" />   
     
 </RelativeLayout>

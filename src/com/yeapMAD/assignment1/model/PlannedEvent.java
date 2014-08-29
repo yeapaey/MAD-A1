@@ -28,6 +28,7 @@ public class PlannedEvent implements Serializable
 
 	public PlannedEvent(String title, String venue, Calendar startTime, Calendar endTime, String note)
 	{
+		id = UUID.randomUUID();
 		this.title = title;
 		this.venue = venue;
 		this.startTime = startTime;

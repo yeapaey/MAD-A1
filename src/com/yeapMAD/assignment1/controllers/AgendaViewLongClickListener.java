@@ -21,6 +21,7 @@ public class AgendaViewLongClickListener implements AdapterView.OnItemLongClickL
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
 	{
 		PlannedEvent event = (PlannedEvent) callback.getItem(position);
+		// PlannedEvent original = DataEngine.getEventById(event.getId());
 		Context context = parent.getContext();
 		Intent intent = new Intent(context, EventEditor.class);
 		intent.putExtra(EventEditor.PASSED_STATE, event);

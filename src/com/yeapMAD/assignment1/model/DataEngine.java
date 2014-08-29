@@ -1,6 +1,7 @@
 package com.yeapMAD.assignment1.model;
 
 import java.util.LinkedList;
+import java.util.UUID;
 
 import android.app.Application;
 
@@ -17,23 +18,44 @@ public class DataEngine extends Application
 
 	public static void addEvent(PlannedEvent newEvent)
 	{
-		int iter;
-		for (iter = 0; newEvent.getDate().after(events.get(iter).getDate()); ++iter)
+		int iter = 0;
+		if (events.isEmpty())
 		{
-		}
-
-		if (iter == events.size())
-		{
-			events.addLast(newEvent);
+			events.add(newEvent);
 		}
 		else
 		{
-			events.add(iter, newEvent);
+			for (iter = 0; newEvent.getDate().after(events.get(iter).getDate()); ++iter)
+			{
+			}
+
+			if (iter == events.size())
+			{
+				events.addLast(newEvent);
+			}
+			else
+			{
+				events.add(iter, newEvent);
+			}
 		}
+
+
 	}
 
 	public static LinkedList<PlannedEvent> getEvents()
 	{
 		return events;
+	}
+
+	public static PlannedEvent getEventById(UUID id)
+	{
+		for (PlannedEvent event : events)
+		{
+			if (event.getId().compareTo(id) == 0)
+			{
+				return event;
+			}
+		}
+		return null;
 	}
 }
