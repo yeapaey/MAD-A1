@@ -4,6 +4,12 @@
     <string name="app_name">Shmalendar!</string>
     <string name="title_activity_event_editor">EventEditor</string>
     <string name="event_test_button">Add Guest</string>
+    <string name="events_month_previous">Prev</string>
+    <string name="events_month_next">Next</string>
+    <string name="label_from">From</string>
+    <string name="label_to">To</string>
+    <string name="label_date">Date</string>
+    
     
 <!-- ACTION BAR ACTIONS -->
 	<string name="action_done">Done</string>    
@@ -18,6 +24,11 @@
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
     <string name="hint_notes">Add notes here</string>
+    <string name="hint_venue">Venue</string>
+    <string name="hint_lat">Latitude</string>
+    <string name="hint_long">Longitude</string>
+    <string name="hint_start_time">start time</string>
+    <string name="hint_end_time">end time</string>
     
     
 
